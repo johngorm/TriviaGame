@@ -20,31 +20,60 @@ var quizGame =
 }
 
 $(document).ready(function() {
-	console.log('app.js');
 	
-	//Display questions and answers to computer screen
-	for(var jj = 0; jj < quizGame.questions.length; jj++){
-		var $question = $('<div>');
-		var $questionPrompt = $('<p>');
-		$questionPrompt.text(quizGame['questions'][jj]['prompt']);
-		$question.append($questionPrompt);
-		$question.addClass('question');
-		var $form = $('<form>'); //Why does this have to be outside the second for loop?
-		$('#quiz_area').append($question);		
-		for(var ii = 0; ii < 4; ii++){
-			
-			var $input = $('<input>');
-			var label = quizGame['questions'][jj]['answers'][ii] + "  " ;
-			$input.attr('type','radio');
-			$input.attr('value', label);
-			$input.attr('name','answer');
-			$form.append($input);
-			$form.append(label)
-			$form.addClass('answers');
-		}
-		$('#quiz_area').append($form);
+
+
+	var stopTimer = function() {
+		console.log('foo');
 	}
 
+	var startGame = function (){//Display questions and answers to computer screen
+
+		for(var jj = 0; jj < quizGame.questions.length; jj++){
+			var $question = $('<div>');
+			var $questionPrompt = $('<p>');
+			$questionPrompt.text(quizGame['questions'][jj]['prompt']);
+			$question.append($questionPrompt);
+			$question.addClass('question');
+			var $form = $('<form>'); //Why does this have to be outside the second for loop?
+			$('#quiz_area').append($question);		
+			for(var ii = 0; ii < 4; ii++){
+				
+				var $input = $('<input>');
+				var label = " " + quizGame['questions'][jj]['answers'][ii] + "  " ;
+				$input.attr('type','radio');
+				$input.attr('value', label);
+				$input.attr('name','answer');
+				$form.append($input);
+				$form.append(label)
+				$form.addClass('answers');
+			}
+			$('#quiz_area').append($form);
+			$divSpace = $('<br>');
+			$('#quiz_area').append($divSpace);
+		}
+		$stopTimeButton = $('<button>');
+		$stopTimeButton.text('Stop Time');
+		$stopTimeButton.addClass('timeButton');
+		
+		$('#quiz_area').append($stopTimeButton);
+
+	};
+
+	startGame();
+	var seconds = 60;
+	var myVar = setInterval(secondTimer, 1000);
+	function secondTimer(){
+		console.log(--seconds);
+	}	
+
+	$('input').on('click', function() {
+		console.log($('input [type=radio]').val());
+	});
+
+	$('.timeButton').on('click',function () {
+		clearInterval(myVar);
+	})
 	
 //  for(var ii = 0; ii < 4; ii++){
 	// 	var $label = $('<label>');
