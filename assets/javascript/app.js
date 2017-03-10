@@ -10,6 +10,9 @@ var quizGame = {
     }]
 };
 
+var correctGuess = 0;
+var numQuestions = quizGame.questions.length;
+
 // var writeQuizToScreen = function() {
 // 	for(var jj = 0; jj < quizGame.questions.length; jj++){
 // 			var $question = $('<div>');
@@ -37,12 +40,13 @@ var quizGame = {
 // }
 
 $(document).ready(function() {
-
+	var seconds = 10;
+	var timerVar;
     // Display questions and answers
     var startGame = function() {
         $('#quiz_area').empty();
-
-        //writeQuizToScreen();
+        var posPointer = 0;
+  
         quizGame.questions.forEach(function(question) {
             var $question = $('<div>');
             var $questionPrompt = $('<p>');
@@ -50,12 +54,11 @@ $(document).ready(function() {
 
             $questionPrompt.text(question.prompt);
             $question.append($questionPrompt).addClass('question');
-
-            $('#quiz_area').append($question);
+           	$question.attr('data-position',posPointer);
 
             question.answers.forEach(function(answer) {
                 var $input = $('<input>');
-                var label = " " + answer + "  ";
+                var label = answer;
 
                 $input.attr('type', 'radio');
                 $input.attr('value', label);
@@ -65,9 +68,13 @@ $(document).ready(function() {
                 $form.append(label)
                 $form.addClass('answers');
             });
-            $('#quiz_area').append($form);
+
+            $question.append($form);
             $divSpace = $('<br>');
+            $('#quiz_area').append($question);
             $('#quiz_area').append($divSpace);
+            posPointer++;
+
         });
         $stopTimeButton = $('<button>');
         $stopTimeButton.text('Stop Time');
@@ -75,22 +82,26 @@ $(document).ready(function() {
 
         $('#quiz_area').append($stopTimeButton);
 
+        startTimer();
+
     };
 
-
-
-    var stopTimer = function() {
-    	console.log('foo');
+    var startTimer = function() {
+    	 
+   		 timerVar = setInterval(countdown, 1000);
     }
 
 
-    var seconds = 60;
-    var myVar = setInterval(secondTimer, 1000);
-    function secondTimer(){
+   
+    function countdown(){
     	console.log(seconds--);
+    	if(seconds === -1){
+    		clearInterval(timerVar);
+    	}
     }	
 
-    $('#quiz_area').delegate('[type=radio]', 'click', function() {
+    // $('#quiz_area').delegate('[type=radio]', 'click', function() {
+    $('#quiz_area').on( 'click', '[type=radio]', function() {
     	console.log($(this).val());
     });
 
@@ -99,10 +110,36 @@ $(document).ready(function() {
     })
 
     $('#quiz_area').delegate('.stop-btn','click', function() {
-        clearInterval(myVar);
+        clearInterval(timerVar);
+        getResults();
         
     })
 
+
+    var getResults = function (){
+    
+		var userAnswers = $('#quiz_area :input[type=radio]:checked ')
+		var gameAnswers = quizGame.questions;
+
+		for(var jj = 0; jj< numQuestions; jj++){
+
+			var playerAns = userAnswers[jj].getAttribute('value');
+			var correctAns = gameAnswers[jj].correctAnswer;
+			if(playerAns === correctAns){
+				correctGuess++;
+			}
+
+		}
+
+    	displayResults();
+    }
+
+    var displayResults = function(){
+    	$('#quiz_area').empty();
+    	$('#quiz_area').append($('<p>').html('Results'));
+    	$('#quiz_area').append($('<p>').html('Correct: ' + correctGuess));
+    	$('#quiz_area').append($('<p>').html('Wrong: ' + (numQuestions - correctGuess)));
+    }
     //  for(var ii = 0; ii < 4; ii++){
     // 	var $label = $('<label>');
     // 	var answerValue = quizGame['questions'][0]['answers'][ii];
