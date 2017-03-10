@@ -13,31 +13,7 @@ var quizGame = {
 var correctGuess = 0;
 var numQuestions = quizGame.questions.length;
 
-// var writeQuizToScreen = function() {
-// 	for(var jj = 0; jj < quizGame.questions.length; jj++){
-// 			var $question = $('<div>');
-// 			var $questionPrompt = $('<p>');
-// 			$questionPrompt.text(quizGame['questions'][jj]['prompt']);
-// 			$question.append($questionPrompt);
-// 			$question.addClass('question');
-// 			var $form = $('<form>'); //Why does this have to be outside the second for loop?
-// 			$('#quiz_area').append($question);		
-// 			for(var ii = 0; ii < 4; ii++){
 
-// 				var $input = $('<input>');
-// 				var label = " " + quizGame['questions'][jj]['answers'][ii] + "  " ;
-// 				$input.attr('type','radio');
-// 				$input.attr('value', label);
-// 				$input.attr('name','answer');
-// 				$form.append($input);
-// 				$form.append(label)
-// 				$form.addClass('answers');
-// 			}
-// 			$('#quiz_area').append($form);
-// 			$divSpace = $('<br>');
-// 			$('#quiz_area').append($divSpace);
-// 		}
-// }
 
 $(document).ready(function() {
 	var seconds = 10;
@@ -89,16 +65,14 @@ $(document).ready(function() {
     var startTimer = function() {
     	 
    		 timerVar = setInterval(countdown, 1000);
-    }
+    };
 
-
-   
     function countdown(){
     	console.log(seconds--);
     	if(seconds === -1){
     		clearInterval(timerVar);
     	}
-    }	
+    };	
 
     // $('#quiz_area').delegate('[type=radio]', 'click', function() {
     $('#quiz_area').on( 'click', '[type=radio]', function() {
@@ -107,39 +81,41 @@ $(document).ready(function() {
 
     $('.start-btn').on('click', function() {
         startGame();
-    })
+    });
 
     $('#quiz_area').delegate('.stop-btn','click', function() {
         clearInterval(timerVar);
         getResults();
         
-    })
+    });
 
 
-    var getResults = function (){
+    var getResults = function () {
     
-		var userAnswers = $('#quiz_area :input[type=radio]:checked ')
-		var gameAnswers = quizGame.questions;
-
-		for(var jj = 0; jj< numQuestions; jj++){
-
-			var playerAns = userAnswers[jj].getAttribute('value');
-			var correctAns = gameAnswers[jj].correctAnswer;
-			if(playerAns === correctAns){
-				correctGuess++;
+	
+		var quizForms = $('.question form');
+		
+		for(var ii = 0; ii < quizForms.length; ii++){
+			var questionInput = quizForms[ii].children;
+			var currentQuestion = quizGame.questions[ii];
+			
+			for(var jj = 0; jj < questionInput.length; jj++){
+				if(questionInput[jj].checked && (questionInput[jj].getAttribute('value') === currentQuestion.correctAnswer)){
+					correctGuess++;
+				}
 			}
-
-		}
+		};	
+	
 
     	displayResults();
-    }
+    };
 
     var displayResults = function(){
     	$('#quiz_area').empty();
     	$('#quiz_area').append($('<p>').html('Results'));
     	$('#quiz_area').append($('<p>').html('Correct: ' + correctGuess));
     	$('#quiz_area').append($('<p>').html('Wrong: ' + (numQuestions - correctGuess)));
-    }
+    };
     //  for(var ii = 0; ii < 4; ii++){
     // 	var $label = $('<label>');
     // 	var answerValue = quizGame['questions'][0]['answers'][ii];
@@ -154,12 +130,4 @@ $(document).ready(function() {
     // 	$answers.append($label);
     // }
     // 	$('#quiz_area').append($answers);
-
-
-
-
-
-
-
-
 });
