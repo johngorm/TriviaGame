@@ -1,7 +1,49 @@
+*{
+	box-sizing: border-box;
+}
 
+#game-title{
+	background: rgba(150, 150, 150, 0.4);
+	color: white;
+	border-radius: 3px;
+	padding-top: 10px;
+	padding-bottom: 15px;
+}
 
+.btn{
+	border-radius: 1px;
+}
+
+.question{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
 
 input[type=radio] {
 	margin-left: 10px;
 	margin-right: 5px;
+}
+
+#quiz_area p {
+	font-size: 20px;
+}
+
+.answers{
+	font-size: 16px;
+}
+
+#timer{
+	
+    overflow-x: auto;
+    border: 2px solid black;
+}
+
+
+@media only screen and (min-width: 850px){
+	#timer{
+	position: fixed;
+    left: 15px;
+    width: 20%;
+    height: auto;
+	}
 }

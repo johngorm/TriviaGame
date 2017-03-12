@@ -4,9 +4,44 @@ var quizGame = {
         answers: ['1988', '1990', '1993', '1998'],
         correctAnswer: '1993'
     }, {
-        prompt: "What is your favorite instrument?",
-        answers: ['Guitar', 'Drums', 'Piano', 'Saxophone'],
-        correctAnswer: 'Guitar'
+        prompt: "What is the name of the law that models the exponential increase in transistors per square inch on computer chips?",
+        answers: ['Gates\' Law', 'Wozniak\'s Law', 'Lovelace\'s Law', 'Moore\'s Law'],
+        correctAnswer: 'Moore\'s Law'
+    }, {
+        prompt: 'This webcomic makes frequent use humor based on computer science.',
+        answers: ['XKCD', 'Archie', 'BitFlip', 'JS-WOTs'],
+        correctAnswer: 'Cu'
+    }, {
+        prompt: 'Which of these is not used in front-end web development' ,
+        answers: ['HTML', 'SQL', 'Javascript', 'CSS'],
+        correctAnswer: 'SQL'
+    }, {
+        prompt: 'The first Apple computer was released in: ' ,
+        answers: ['1975', '1976', '1981', '1983'],
+        correctAnswer: '1976'
+
+    }, { 
+        prompt: 'The minimum number of bits needed to write the number 1000 in binary is: ' ,
+        answers: ['9', '15', '16', '22'],
+        correctAnswer: '9'
+    }, {
+        prompt: 'Decorative strokes at the ends of a character are called:' ,
+        answers: ['ticks', 'montunos', 'serifs', 'stroke marks'],
+        correctAnswer: 'serifs'
+    }, {
+        prompt: 'The name of the logic that computers perform on bits' ,
+        answers: ['Mealy', 'Boschian', 'Nate', 'Boolean'],
+        correctAnswer: 'Boolean'
+    },
+    {
+        prompt: 'In Javascript, Objects are ' ,
+        answers: ['First Class Citizens', 'Mostly Given Prefence', 'Are Not Functions', 'Nonexistent'],
+        correctAnswer: 'First Class Citizens'
+    },{
+
+        prompt: 'A communication system that transfers data between computer architecture components is: ' ,
+        answers: ['a Wire', 'A Net', 'A Bus', 'A Channel'],
+        correctAnswer: 'A Bus'
     }]
 };
 
@@ -16,7 +51,7 @@ var numQuestions = quizGame.questions.length;
 
 
 $(document).ready(function() {
-    var seconds = 30;
+    var seconds = 60;
     var timerVar;
     // Display questions and answers
     var startGame = function() {
@@ -25,7 +60,7 @@ $(document).ready(function() {
         // Put seconds counter in top of #quiz_area
         var $secondCounter = $('<div>');
         $secondCounter.attr('id','timer');
-        $secondCounter.html('<h1> Time Remaining: ' + seconds + '</h1>')
+        $secondCounter.html('<h2> Time Remaining: ' + seconds + '</h2>')
         $('#quiz_area').append($secondCounter);
         //Copy questions to DOM
         quizGame.questions.forEach(function(question) {
@@ -75,7 +110,7 @@ $(document).ready(function() {
     function countdown() {
         seconds--;
         $('#timer').empty();
-        $('#timer').html('<h1> Time Remaining: ' + seconds + '</h1>');
+        $('#timer').html('<h2> Time Remaining: ' + seconds + '</h2>');
         if (seconds === 0) {
             endGame();
         }
