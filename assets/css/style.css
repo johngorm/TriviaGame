@@ -2,13 +2,35 @@
 	box-sizing: border-box;
 }
 
+body{
+	background-image: url('../images/seamless-pattern-computer-circuit-board.jpg')
+	/*background-size: 800px 800px;*/
+}
+
+.container{
+	background-color: rgba(256,256,256, 0.94)
+	/*background:black;*/
+}
+
 #game-title{
-	background: rgba(150, 150, 150, 0.4);
-	color: white;
+	background: black;
+	color: lime;
 	border-radius: 3px;
 	padding-top: 10px;
 	padding-bottom: 15px;
 }
+
+#quiz_area{
+	background:black;
+	color: lime;
+	margin-bottom: 25px;
+	padding-bottom: 15px;
+	border-left: 3px solid grey;
+	border-bottom: 8px solid grey; 
+	border-right: 15px solid grey;
+	border-top: 15px solid navy;
+}
+
 
 .btn{
 	border-radius: 1px;
@@ -17,6 +39,7 @@
 .question{
 	padding-top: 10px;
 	padding-bottom: 10px;
+
 }
 
 input[type=radio] {
@@ -33,7 +56,7 @@ input[type=radio] {
 }
 
 #timer{
-	
+	background-color: black;
     overflow-x: auto;
     border: 2px solid black;
 }
@@ -43,7 +66,8 @@ input[type=radio] {
 	#timer{
 	position: fixed;
     left: 15px;
-    width: 20%;
+    width: 160px;
     height: auto;
 	}
 }
+

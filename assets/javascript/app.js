@@ -60,7 +60,7 @@ $(document).ready(function() {
         // Put seconds counter in top of #quiz_area
         var $secondCounter = $('<div>');
         $secondCounter.attr('id','timer');
-        $secondCounter.html('<h2> Time Remaining: ' + seconds + '</h2>')
+        $secondCounter.html('<h2>C:>Time Remaining: ' + seconds + '</h2>')
         $('#quiz_area').append($secondCounter);
         //Copy questions to DOM
         quizGame.questions.forEach(function(question) {
@@ -68,7 +68,7 @@ $(document).ready(function() {
             var $questionPrompt = $('<p class=question-prompt>');
             var $form = $('<form>'); //Why does this have to be outside the second for loop?
 
-            $questionPrompt.text(question.prompt);
+            $questionPrompt.text("C:>"+question.prompt);
             $question.append($questionPrompt).addClass('question');
             $question.attr('data-position', posPointer);
             //Copy the possible answers and assign a radio button for each
@@ -110,7 +110,7 @@ $(document).ready(function() {
     function countdown() {
         seconds--;
         $('#timer').empty();
-        $('#timer').html('<h2> Time Remaining: ' + seconds + '</h2>');
+        $('#timer').html('<h2>C:>Time Remaining: ' + seconds + '</h2>');
         if (seconds === 0) {
             endGame();
         }
