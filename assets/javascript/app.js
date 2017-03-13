@@ -51,7 +51,7 @@ var numQuestions = quizGame.questions.length;
 
 
 $(document).ready(function() {
-    var seconds = 60;
+    var seconds = 100;
     var timerVar;
     // Display questions and answers
     var startGame = function() {
