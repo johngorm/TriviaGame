@@ -1,8 +1,8 @@
 var quizGame = {
     questions: [{
-        prompt: "What year were you born?",
-        answers: ['1988', '1990', '1993', '1998'],
-        correctAnswer: '1993'
+        prompt: "Services like Heroku are refered to as what?",
+        answers: ['SaaS', 'PaaS', 'NaaS', 'IaaS'],
+        correctAnswer: 'PaaS'
     }, {
         prompt: "What is the name of the law that models the exponential increase in transistors per square inch on computer chips?",
         answers: ['Gates\' Law', 'Wozniak\'s Law', 'Lovelace\'s Law', 'Moore\'s Law'],
@@ -10,7 +10,7 @@ var quizGame = {
     }, {
         prompt: 'This webcomic makes frequent use humor based on computer science.',
         answers: ['XKCD', 'Archie', 'BitFlip', 'JS-WOTs'],
-        correctAnswer: 'Cu'
+        correctAnswer: 'XKCD'
     }, {
         prompt: 'Which of these is not used in front-end web development' ,
         answers: ['HTML', 'SQL', 'Javascript', 'CSS'],
@@ -22,8 +22,8 @@ var quizGame = {
 
     }, { 
         prompt: 'The minimum number of bits needed to write the number 1000 in binary is: ' ,
-        answers: ['9', '15', '16', '22'],
-        correctAnswer: '9'
+        answers: ['10', '15', '16', '22'],
+        correctAnswer: '10'
     }, {
         prompt: 'Decorative strokes at the ends of a character are called:' ,
         answers: ['ticks', 'montunos', 'serifs', 'stroke marks'],
@@ -35,12 +35,12 @@ var quizGame = {
     },
     {
         prompt: 'In Javascript, Objects are ' ,
-        answers: ['First Class Citizens', 'Mostly Given Prefence', 'Are Not Functions', 'Nonexistent'],
+        answers: ['Volitile', 'Static', 'First Class Citizens', 'Nonexistent'],
         correctAnswer: 'First Class Citizens'
     },{
 
         prompt: 'A communication system that transfers data between computer architecture components is: ' ,
-        answers: ['a Wire', 'A Net', 'A Bus', 'A Channel'],
+        answers: ['A Wire', 'A Net', 'A Bus', 'A Channel'],
         correctAnswer: 'A Bus'
     }]
 };
@@ -92,8 +92,9 @@ $(document).ready(function() {
             posPointer++;
 
         });
-        $stopTimeButton = $('<button class="btn btn-lrg btn-warning">');
-        $stopTimeButton.text('Stop Time');
+        //Add button to end quiz
+        $stopTimeButton = $('<button class="btn btn-lrg btn-success">');
+        $stopTimeButton.text('Submit Answers');
         $stopTimeButton.addClass('stop-btn');
 
         $('#quiz_area').append($stopTimeButton);
@@ -103,7 +104,7 @@ $(document).ready(function() {
     };
 
     var startTimer = function() {
-
+        //Every second, decrement the seconds variable and display new value
         timerVar = setInterval(countdown, 1000);
     };
 
@@ -140,14 +141,15 @@ $(document).ready(function() {
     var getResults = function() {
 
         var quizForms = $('.question form');
-
+        //Loop through each question and  put all respective radio buttons into radioButtons, 
         for (var ii = 0; ii < quizForms.length; ii++) {
-            var questionInput = quizForms[ii].children;
+            var radioButtons = quizForms[ii].children;
             var currentQuestion = quizGame.questions[ii];
 
-            for (var jj = 0; jj < questionInput.length; jj++) {
-                var userAnswer = questionInput[jj].getAttribute('value');
-                if (questionInput[jj].checked && (userAnswer === currentQuestion.correctAnswer)) {
+            for (var jj = 0; jj < radioButtons.length; jj++) {
+                var userAnswer = radioButtons[jj].getAttribute('value');
+                //if user checked the radio button with the correct value, increment score
+                if (radioButtons[jj].checked && (userAnswer === currentQuestion.correctAnswer)) {
                     correctGuess++;
                 }
             }
@@ -159,7 +161,7 @@ $(document).ready(function() {
 
     var displayResults = function() {
         $('#quiz_area').empty();
-        $('#quiz_area').append($('<p>').html('Results'));
+        $('#quiz_area').append($('<p>').html('C:>Results'));
         $('#quiz_area').append($('<p>').html('Correct: ' + correctGuess));
         $('#quiz_area').append($('<p>').html('Wrong: ' + (numQuestions - correctGuess)));
     };

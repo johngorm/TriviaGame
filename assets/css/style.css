@@ -7,33 +7,52 @@ body{
 	/*background-size: 800px 800px;*/
 }
 
+h1 ,h2, p, form{
+	font-family: 'Courier New', Courier, monospace;
+}
+
 .container{
-	background-color: rgba(256,256,256, 0.94)
+	background-color: rgba(256,256,256, 0.3);
+
 	/*background:black;*/
 }
 
 #game-title{
 	background: black;
 	color: lime;
-	border-radius: 3px;
+	border: 3px solid lime;
+	border-radius: 20px;
 	padding-top: 10px;
 	padding-bottom: 15px;
 }
 
 #quiz_area{
-	background:black;
-	color: lime;
-	margin-bottom: 25px;
-	padding-bottom: 15px;
-	border-left: 3px solid grey;
-	border-bottom: 8px solid grey; 
-	border-right: 15px solid grey;
-	border-top: 15px solid navy;
+	background: black;
+    color: lime;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border: 10px solid lightgrey;
+   
+    border-radius: 2px;
+    box-shadow: 0px 6px 20px 0 rgba(0,0,0, 0.4), 0px 21px 20px 0 rgba(0,0,0,0.39);
 }
 
 
 .btn{
-	border-radius: 1px;
+	width: auto;
+	height: 125px;
+	overflow-x: wrap;
+	font-size: 30px;
+	color: black;
+	background: -webkit-linear-gradient(lime, forestgreen);
+	background: -moz-linear-gradient(lime, forestgreen);
+	background: linear-gradient(lime, forestgreen);
+
+}
+
+.btn:hover{
+	color: white;
+	background-color: forestgreen;
 }
 
 .question{
@@ -56,9 +75,11 @@ input[type=radio] {
 }
 
 #timer{
-	background-color: black;
+	background-color: lime;
+	color: black;
     overflow-x: auto;
     border: 2px solid black;
+    margin-top: 17px;
 }
 
 
@@ -66,8 +87,14 @@ input[type=radio] {
 	#timer{
 	position: fixed;
     left: 15px;
-    width: 160px;
+    width: 195px;
     height: auto;
+	}
+
+	.btn{
+		width: inherit;
+		height: auto;
+		font-size: 20px;
 	}
 }
 
