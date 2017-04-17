@@ -4,7 +4,7 @@
 
 body{
 	background-image: url('../images/seamless-pattern-computer-circuit-board.jpg')
-	/*background-size: 800px 800px;*/
+	
 }
 
 h1 ,h2, p, form{
@@ -14,7 +14,6 @@ h1 ,h2, p, form{
 .container{
 	background-color: rgba(256,256,256, 0.3);
 
-	/*background:black;*/
 }
 
 #game-title{
@@ -81,6 +80,7 @@ input[type=radio] {
     border: 2px solid black;
     margin-top: 17px;
 }
+
 
 
 @media only screen and (min-width: 850px){
