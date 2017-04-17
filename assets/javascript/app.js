@@ -47,6 +47,7 @@ var quizGame = {
 
 var correctGuess = 0;
 var numQuestions = quizGame.questions.length;
+var array_incorrect = [];
 
 
 
@@ -118,9 +119,9 @@ $(document).ready(function() {
     };
 
     // $('#quiz_area').delegate('[type=radio]', 'click', function() {
-    $('#quiz_area').on('click', '[type=radio]', function() {
-        console.log($(this).val());  //d
-    });
+    // $('#quiz_area').on('click', '[type=radio]', function() {
+    //     console.log($(this).val());  //d
+    // });
 
     $('.start-btn').on('click', function() {
         startGame();
@@ -139,19 +140,23 @@ $(document).ready(function() {
 
 
     var getResults = function() {
-
+        var isAnsweredCorrect;
         var quizForms = $('.question form');
         //Loop through each question and  put all respective radio buttons into radioButtons, 
         for (var ii = 0; ii < quizForms.length; ii++) {
             var radioButtons = quizForms[ii].children;
             var currentQuestion = quizGame.questions[ii];
-
+            isAnsweredCorrect = false;
             for (var jj = 0; jj < radioButtons.length; jj++) {
                 var userAnswer = radioButtons[jj].getAttribute('value');
                 //if user checked the radio button with the correct value, increment score
                 if (radioButtons[jj].checked && (userAnswer === currentQuestion.correctAnswer)) {
                     correctGuess++;
+                    isAnsweredCorrect = true;
                 }
+            }
+            if(!isAnsweredCorrect){
+                array_incorrect.push(ii+1);
             }
         };
 
@@ -164,6 +169,7 @@ $(document).ready(function() {
         $('#quiz_area').append($('<p>').html('C:>Results'));
         $('#quiz_area').append($('<p>').html('Correct: ' + correctGuess));
         $('#quiz_area').append($('<p>').html('Wrong: ' + (numQuestions - correctGuess)));
+        $('#quiz_area').append($('<p>').html('Questions you got wrong: ' + array_incorrect))
     };
     //  for(var ii = 0; ii < 4; ii++){
     //  var $label = $('<label>');
